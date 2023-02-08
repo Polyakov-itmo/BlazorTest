@@ -1,0 +1,46 @@
+﻿<div class="navbar-container">
+        <div class="navbar__title-block">
+        <a class="navbar__title-block__title" href="">Specification</a>
+        <button title="Navigation menu" class="btn btn-collapse" @onclick="ToggleNavMenu">
+            <img class="icon-full" src="collapse-arrow.svg" title="coolapse" />
+        </button>
+    </div>
+    @*<div class="">asdas</div>*@
+    <nav class="navbar__items-block">
+        <div class="navbar-item">
+            <NavLink class="navbar-link" href="" Match="NavLinkMatch.All">
+                <img class="navbar-link__icon" src="nav-icon_home.svg" />
+                <span class="navbar-link__text">Home</span>
+             </NavLink>
+        </div>
+        
+        <div class="navbar-item">
+            <NavLink class="navbar-link" href="todo">
+                <img class="navbar-link__icon" src="nav-icon_todo.svg" />
+                <span class="navbar-link__text">Todo</span>
+            </NavLink>
+        </div>
+
+        <div class="navbar-item">
+            <NavLink class="navbar-link" href="counter">
+                Counter
+            </NavLink>
+        </div>  
+        <div class="navbar-item">
+            <NavLink class="navbar-link" href="fetchdata">
+                Fetch data
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
