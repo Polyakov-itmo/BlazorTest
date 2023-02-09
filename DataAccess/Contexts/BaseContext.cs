@@ -1,17 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Contexts
 {
-    public class BaseContext<TModel> : DbContext
+    public class BaseContext : DbContext
     {
-        public BaseContext(DbContextOptions<BaseContext<TModel>> options) : base(options)
+        public BaseContext(DbContextOptions<BaseContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=Testing;user=user1;password=qwerty;MultipleActiveResultSets=True");
-        }
+        public DbSet<Todo>? Todos { get; set; }
+        /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+         {
+             optionsBuilder.UseSqlite("Data Source=helloapp.db");
+         }*/
     }
 }

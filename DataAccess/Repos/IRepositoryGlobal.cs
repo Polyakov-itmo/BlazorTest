@@ -1,4 +1,4 @@
-﻿using DataAccess.Repos.Def;
+﻿using DataAccess.Repos.Todo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repos
 {
-    public class TodoRepository : BaseRepository<>
+    public interface IRepositoryGlobal
     {
+        ITodoRepository Todos { get; }
+
+        void Save();
     }
 }

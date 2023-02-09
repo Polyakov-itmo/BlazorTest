@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Contexts
+namespace DataAccess.Repos.Todo
 {
-    public interface IBaseContext
+    public interface ITodoRepository
     {
     }
 }
