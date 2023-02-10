@@ -20,29 +20,29 @@ namespace BusinessLogic.Services
             repository = _repository;
         }
 
-        public virtual async Task<TModel> Create(TModel model)
+
+
+
+        public virtual async Task<TModel> CreateInternal(TModel model)
         {
             return await repository.Create(model);
         }
 
-        public virtual async Task<TModel> Update(TModel model)
+        public virtual async Task<TModel> UpdateInternal(TModel model)
         {
             return await repository.Update(model);
         }
-
-        public virtual async Task<int?> Delete(int id)
+        public virtual async Task<int?> DeleteInternal(int id)
         {
             var deletedModel = await repository.Delete(id);
             return deletedModel.Id;
         }
-
-        public virtual async Task<TModel?> Get(int id)
+        public virtual async Task<TModel?> GetInternal(int id)
         {
             return await repository.Get(id);
 
         }
-
-        public Task<IEnumerable<TModel>> GetAll()
+        public Task<IEnumerable<TModel>> ListInternal()
         {
             throw new NotImplementedException();
         }

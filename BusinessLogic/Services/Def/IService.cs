@@ -10,10 +10,10 @@ namespace BusinessLogic.Services.Def
     public interface IService<TModel> 
         where TModel : IdModel
     {
-        Task<TModel> Create(TModel model);
-        Task<TModel> Get(int id);
-        Task<IEnumerable<TModel>> GetAll();
-        Task<int?> Delete(int id);
-        Task<TModel?> Update(TModel model);
+        Task<TModel> CreateInternal(TModel model);
+        Task<TModel> GetInternal(int id);
+        Task<IEnumerable<TModel>> ListInternal();
+        Task<int?> DeleteInternal(int id);
+        Task<TModel?> UpdateInternal(TModel model);
     }
 }

@@ -12,9 +12,13 @@ namespace BusinessLogic.Services.Todo
     {
         
     }*/
-
     public interface ITodoService<TodoCreate, TodoUpdate, TodoResult> : IService<DataAccess.Models.Todo>
     {
 
+        Task<DataAccess.Models.Todo> Create(TodoCreate model);
+        Task<DataAccess.Models.Todo> Update(TodoUpdate model);
+        Task<int?> Delete(int id);
+        Task<DataAccess.Models.Todo> Get(int id);
+        Task<List<TodoResult>> List();
     }
 }
