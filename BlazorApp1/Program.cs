@@ -1,5 +1,9 @@
+using BlazorApp1;
 using BlazorApp1.Data;
+using BlazorApp1.Infrastructure;
 using DataAccess.Contexts;
+using DataAccess.Repos;
+using DataAccess.Repos.Todo;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddDbContext<BaseContext>(opt =>
-    opt.UseSqlServer(
-        Configuration.GetConnectionString("DefaultConnection"),
-    b => b.MigrationsAssembly(typeof(BaseContext).Assembly.FullName)));
+
+
+builder.Services.AddScoped<IRepositoryGlobal, RepositoryGlobal>();
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+//builder.Services.AddHostedService<BackgroundWorkerService>();
+
+builder.Services.ConfigureSqLiteContext(builder.Configuration);
+
+builder.Services.ConfigureRepository();
+
 
 var app = builder.Build();
 

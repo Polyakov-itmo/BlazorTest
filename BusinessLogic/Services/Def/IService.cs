@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services.Def
 {
-    public interface IService<TCreate, TUpdate, TResult, TModel> 
-        where TCreate : class
-        where TUpdate : class
-        where TResult : class
-        where TModel : IIdModel
+    public interface IService<TModel> 
+        where TModel : IdModel
     {
-        Task<TModel> Create(TCreate model);
-        Task<TResult> Get(int? id);
-        Task<IEnumerable<TResult>> GetAll();
-        Task<int?> Delete(int? id);
-        Task<TModel?> Update(TUpdate model);
+        Task<TModel> Create(TModel model);
+        Task<TModel> Get(int id);
+        Task<IEnumerable<TModel>> GetAll();
+        Task<int?> Delete(int id);
+        Task<TModel?> Update(TModel model);
     }
 }

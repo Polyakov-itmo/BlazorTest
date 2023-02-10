@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Services.Def;
+﻿using BusinessLogic.Mapping;
+using BusinessLogic.Services.Def;
 using DataAccess.Models.Def;
 using DataAccess.Repos.Def;
 using System;
@@ -9,50 +10,42 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
-    internal class ServiceGlobal<TCreate, TUpdate, TResult, TModel> : ServiceBase, IService<TCreate, TUpdate, TResult, TModel> 
-        where TCreate : class
-        where TUpdate : class
-        where TResult : class
-        where TModel : IIdModel
+    internal class ServiceGlobal<TModel> : ServiceBase, IService<TModel> 
+        where TModel : IdModel
         
 
     {
-        private readonly IBaseRepository<TModel> repository;
+        protected  IBaseRepository<TModel> repository;
         public ServiceGlobal(IBaseRepository<TModel> _repository) { 
             repository = _repository;
         }
 
-        public virtual async Task<int> Create(TCreate model)
+        public virtual async Task<TModel> Create(TModel model)
         {
-            var modelToCreate = Mapper.Map<TModel>(model);
-            var createdModel = await repository.Create(modelToCreate);
-            return createdModel.Id;
-
+            return await repository.Create(model);
         }
 
-        public virtual async Task<int> Update(TUpdate model)
+        public virtual async Task<TModel> Update(TModel model)
         {
-            var modelToUpdate = Mapper.Map<TModel>(model);
-            var updatedModel = await repository.Update(modelToUpdate);
-            return updatedModel.Id;
+            return await repository.Update(model);
         }
 
-        public virtual async Task<int> Delete(int? id)
+        public virtual async Task<int?> Delete(int id)
         {
             var deletedModel = await repository.Delete(id);
-            return deletedModel.id;
+            return deletedModel.Id;
         }
 
-        public Task<TResult> Get(int? id)
+        public virtual async Task<TModel?> Get(int id)
+        {
+            return await repository.Get(id);
+
+        }
+
+        public Task<IEnumerable<TModel>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<TResult>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        
     }
 }

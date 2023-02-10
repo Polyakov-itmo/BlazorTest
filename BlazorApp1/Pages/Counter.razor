@@ -1,4 +1,6 @@
 ﻿@page "/counter"
+@using DataAccess.Repos.Todo;
+
 
 <PageTitle>Counter</PageTitle>
 
@@ -10,6 +12,7 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me again</button>
 
 @code {
+
     private int currentCount = 0;
 
     private void IncrementCount()

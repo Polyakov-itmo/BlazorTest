@@ -1,5 +1,8 @@
 ﻿@page "/fetchdata"
 @using BlazorApp_test
+@using DataAccess.Repos.Todo;
+@using DataAccess.Models;
+@inject TodoRepository todoRepository
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -23,7 +26,12 @@
 </table>
 
 @code {
+    private IEnumerable<DataAccess.Models.Todo>? todos;
+
+    protected async Task Load()
+    {
+        todos = await todoRepository.GetAll();
+    }
 
 
-*@
 }

@@ -9,7 +9,6 @@ namespace BusinessLogic.Services
 {
     internal class ServiceBase
     {
-        protected IMapper Mapper { get;}
 
 
     }

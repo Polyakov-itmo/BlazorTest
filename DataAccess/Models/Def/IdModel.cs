@@ -2,6 +2,6 @@
 {
     public class IdModel : IIdModel
     {
-        public required int Id { get; set; }
+        public int Id { get; set; }
     }
 }

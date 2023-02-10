@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DataAccess.Inrfastructure;
 using DataAccess.Models.Def;
 
 namespace DataAccess.Models
@@ -9,8 +10,8 @@ namespace DataAccess.Models
 
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
-        public int Priority { get; set; }
+        public TodoPriority? Priority { get; set; }
 
-        public bool isDone { get; set; }
+        public bool IsDone { get; set; }
     }
 }
