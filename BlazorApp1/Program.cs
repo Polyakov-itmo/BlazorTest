@@ -18,7 +18,7 @@ builder.Services.AddServerSideBlazor();
 
 
 builder.Services.AddScoped<IRepositoryGlobal, RepositoryGlobal>();
-builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+//builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 //builder.Services.AddHostedService<BackgroundWorkerService>();
 
 builder.Services.ConfigureSqLiteContext(builder.Configuration);

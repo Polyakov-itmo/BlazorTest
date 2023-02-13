@@ -11,7 +11,7 @@ namespace BusinessLogic.Mapping
     public static class TodoMapper
     {
 
-        public static Todo Map(TodoCreate model)
+        public static Todo MapCreate(TodoCreate model)
         {
             return new Todo()
             {
@@ -22,7 +22,7 @@ namespace BusinessLogic.Mapping
             };
         }
 
-        public  static Todo Map(TodoUpdate model)
+        public  static Todo MapUpdate(TodoUpdate model)
         {
             return new Todo()
             {
@@ -33,7 +33,7 @@ namespace BusinessLogic.Mapping
             };
         }
 
-        public static Todo Map(TodoResult model)
+        public static Todo MapResult(TodoResult model)
         {
             return new Todo()
             {
