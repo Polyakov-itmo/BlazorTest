@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Models
 {
-    public class Todo : IdModel
+    public class User : IdModel
     {
-        public string Title { get; set; }
-        public bool IsDone { get; set; }
-
-        //public int UserId { get; set; }
+        public string? Name { get; set; } = null;
+        public List<Todo> Todos { get; set; } = new();
     }
 }

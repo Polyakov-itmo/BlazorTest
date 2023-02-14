@@ -8,6 +8,6 @@ namespace DataAccess.Models.Def
 {
     public interface IIdModel
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
     }
 }
