@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Models
+namespace BusinessLogic.ViewModels.TodoModels
 {
-    public class Todo : IdModel
+    public class TodoCreate
     {
-        public string Text { get; set; }
+        public string? Text { get; set; } = null;
         public bool IsDone { get; set; }
-
         public int UserId { get; set; }
-        public User? User { get; set; }
     }
 }

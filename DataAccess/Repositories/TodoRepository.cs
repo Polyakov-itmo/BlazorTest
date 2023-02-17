@@ -14,25 +14,6 @@ namespace DataAccess.Repositories
     {
         public TodoRepository(BaseContext context) : base(context)
         {
-
-            var List = new List<Todo>()
-            {
-                new Todo()
-                {
-                    Title ="Купить молоко",
-                    IsDone = false
-                },
-                new Todo()
-                {
-                    Title ="Купить молоко",
-                    IsDone = false
-                },
-                new Todo()
-                {
-                    Title ="Купить молоко",
-                    IsDone = false
-                }
-            };
         }
     }
 }

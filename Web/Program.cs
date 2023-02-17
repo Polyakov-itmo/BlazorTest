@@ -1,10 +1,17 @@
 using DataAccess.Contexts;
 using DataAccess.Extensions;
+using DataAccess.Models;
 using DataAccess.Repositories;
+using DataAccess.Repositories.Def;
+using BusinessLogic.Services;
 using DataAccess.Repositories.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Web.Data;
+using BusinessLogic.Mappers.DefMappers;
+using BusinessLogic.ViewModels.TodoModels;
+using BusinessLogic.Mappers;
+using BusinessLogic.ViewModels.UserModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +21,15 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.ConfigureSqlServerContext(builder.Configuration);
 
-builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+builder.Services.AddScoped<IRepository<Todo>, TodoRepository>();
+builder.Services.AddScoped<IRepository<User>, UserRepository>();
+
+builder.Services.AddScoped<IMapper<TodoCreate, TodoUpdate, TodoResult, Todo>, TodoMapper>();
+builder.Services.AddScoped<IMapper<UserCreate, UserUpdate, UserResult, User>, UserMapper>();
+
+builder.Services.AddTransient<ITodoService, TodoService>();
+builder.Services.AddTransient<IUserService, UserService>();
+
 builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();

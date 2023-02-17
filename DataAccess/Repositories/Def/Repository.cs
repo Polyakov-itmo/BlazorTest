@@ -11,62 +11,68 @@ namespace DataAccess.Repositories.Def
 {
     public abstract class Repository<TModel> : IRepository<TModel> where TModel : IdModel
     {
-        protected BaseContext _context { get; set; }
+        private DbContext _context { get; set; }
+        public DbSet<TModel> _dbSet { get; }
 
-        public Repository(BaseContext context)
+        public Repository(DbContext context)
         {
             _context = context;
+            _dbSet = context.Set<TModel>();
         }
 
-        public void Info()
+        public virtual void Info()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<TModel> Create(TModel model)
+        public virtual async Task<TModel?> GetFirst()
         {
-            return (await _context.Set<TModel>().AddAsync(model)).Entity;
+            // return await _context.Set<TModel>().FindAsync(id);
+            return await _dbSet.AsNoTracking().FirstAsync();
         }
 
-        public async Task CreateRange(IEnumerable<TModel> models)
+        public virtual async Task<TModel?> Get(int id)
         {
-            await _context.Set<TModel>().AddRangeAsync(models);
+            return await _dbSet.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-
-        public async Task<TModel?> Get(int id)
+        public virtual async Task<IEnumerable<TModel>?> GetAll()
         {
-            return await _context.Set<TModel>().FindAsync(id);
+            return await _dbSet.AsNoTracking().ToListAsync();
         }
 
-        public async Task<IEnumerable<TModel>?> GetAll()
+        public virtual async Task<TModel?> Create(TModel model)
         {
-            return await _context.Set<TModel>().ToListAsync();
+            var addedModel = (await _dbSet.AddAsync(model)).Entity;
+            Save();
+            return addedModel;
         }
 
-        public async Task<TModel?> Delete(int id)
+        public virtual async Task CreateRange(IEnumerable<TModel> models)
+        {
+            await _dbSet.AddRangeAsync(models);
+            Save();
+        }
+
+        public virtual async Task<TModel?> Delete(int id)
         {
             var model = await Get(id);
             if (model is not null)
             {
-                return (_context.Set<TModel>().Remove(model)).Entity;
+                var deletedModel = _dbSet.Remove(model).Entity;
+                Save();
+                return deletedModel;
             }
             return null;
         }
 
-        public async Task<TModel?> Update(TModel model)
+        public virtual async Task DeleteAll()
         {
-            var modelToUpdate = await _context.Set<TModel>().FindAsync(model.Id);
-            if (modelToUpdate is null)
-            {
-                return null;
-            }
-            _context.Set<TModel>().Update(modelToUpdate);
-            return modelToUpdate;
-
+            _dbSet.RemoveRange(_dbSet.ToList());
         }
 
-        public void Save()
+
+        public virtual void Save()
         {
             _context.SaveChanges();
         }

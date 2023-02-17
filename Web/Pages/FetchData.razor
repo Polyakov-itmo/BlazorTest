@@ -1,10 +1,6 @@
 ﻿@page "/fetchdata"
-@using DataAccess.Models;
-@using DataAccess.Repositories.Interfaces;
-@using DataAccess.Repositories;
 @using Web.Data
 @inject WeatherForecastService ForecastService
-@inject ITodoRepository todoRepository;
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -28,32 +24,13 @@ else
             </tr>
         </thead>
         <tbody>
-            @*@foreach (var forecast in forecasts)
+            @foreach (var forecast in forecasts)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
                     <td>@forecast.TemperatureC</td>
                     <td>@forecast.TemperatureF</td>
                     <td>@forecast.Summary</td>
-                </tr>
-            }*@
-            @if(todos is not null) {
-                @foreach (var todo in todos)
-                {
-                    <tr>
-                        <td>@todo.Title</td>
-                        <td>@todo.IsDone</td>
-                        <td>@todos.Count()</td>
-                        <td>@todos.Count()</td>
-                    </tr>
-                }
-            }
-            else{
-                <tr>
-                    <td>нет</td>
-                    <td>данных</td>
-                    <td>данных</td>
-                    <td>данных</td>
                 </tr>
             }
         </tbody>
@@ -63,11 +40,9 @@ else
 @code {
     private WeatherForecast[]? forecasts;
 
-    private IEnumerable<Todo> todos;
 
     protected override async Task OnInitializedAsync()
     {
-        todos = await todoRepository.GetAll();
         forecasts = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
     }
 }

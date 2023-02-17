@@ -1,0 +1,42 @@
+﻿@page "/users"
+@using BusinessLogic.Services;
+@using BusinessLogic.ViewModels.UserModels;
+
+@inject IUserService _userService;
+
+
+<PageTitle>Users</PageTitle>
+
+<h3>Users</h3>
+
+
+@if (allUsers is null || allUsers.Count() == 0)
+{
+    <p> У вас пока нет пользователей...</p>
+}
+else
+{
+    @foreach(UserResult user in allUsers)
+    {
+        <div>
+            user.Id
+        </div>
+        <div>
+            user.Name
+        </div>
+    }
+  
+}
+
+
+@code {
+    private IEnumerable<UserResult> allUsers = null;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        allUsers = await _userService.GetAll();
+    }
+
+}
