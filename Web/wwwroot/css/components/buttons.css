@@ -1,0 +1,24 @@
+﻿
+.reset-button {
+    border: none;
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 0.8em;
+    padding: 7px 15px;
+    transition: background-color 0.2s;
+}
+
+.confirm-btn {
+    background-color: #1a2cff;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background-color: #000fb5;
+}
+
+
+.back-btn {
+    font-size: 1.1em;
+    margin: 0 0 20px 0;
+}

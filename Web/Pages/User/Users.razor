@@ -1,32 +1,37 @@
 ﻿@page "/users"
 @using BusinessLogic.Services;
 @using BusinessLogic.ViewModels.UserModels;
-
+@using Web.Shared.Components;
 @inject IUserService _userService;
 
 
 <PageTitle>Users</PageTitle>
 
-<h3>Users</h3>
-
-
 @if (allUsers is null || allUsers.Count() == 0)
 {
-    <p> У вас пока нет пользователей...</p>
+    <Notice Title="У вас пока нет пользователей" />
 }
 else
 {
     @foreach(UserResult user in allUsers)
     {
-        <div>
-            user.Id
-        </div>
-        <div>
-            user.Name
+        <div class="user-card">
+            <div>
+                @user.Id
+            </div>
+            <div>
+                @user.Name
+            </div>
         </div>
     }
-  
 }
+
+<a href="users/create">
+    <button class="reset-button confirm-btn">
+        Добавить
+    </button>
+</a>
+
 
 
 @code {

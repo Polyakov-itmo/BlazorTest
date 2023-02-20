@@ -1,0 +1,15 @@
+﻿.user-card{
+    display: flex;
+}
+
+
+.input-title{
+
+}
+
+.input{
+    width: 250px;
+    border-radius: 5px;
+    border: 2px solid #606060;
+    padding: 3px;
+}

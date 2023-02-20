@@ -1,0 +1,50 @@
+﻿@page "/users/create"
+@using BusinessLogic.Services
+@using DataAccess.Models;
+@inject IUserService userService
+
+
+
+<button class="reset-button back-btn theme-neutral">
+    <a href="users">
+        Назад
+    </a>
+</button>
+
+<h3>Создание пользователя</h3>
+
+<article class="input-title">Имя</article>
+<input class="input" type="text" @bind="@UserName"/>
+
+
+<button class="reset-button theme-primary" @onclick=@SubmitUser>Создать</button>
+
+
+@code {
+    public string UserName = "";
+    public User user = new();
+
+    private bool CheckInputs(){
+        if(!String.IsNullOrEmpty(UserName)){
+            return true;
+        }
+        return false;
+    }
+    public void ClearInputs()
+    {
+        UserName = "";
+    }
+
+    public async Task SubmitUser(){
+        if (CheckInputs())
+        {
+            var userToCreate = new BusinessLogic.ViewModels.UserModels.UserCreate()
+                {
+                    Name = UserName
+                };
+            ClearInputs();
+
+            user = await userService.Create(userToCreate);
+        }
+    }
+}
