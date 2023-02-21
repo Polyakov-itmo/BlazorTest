@@ -12,6 +12,9 @@ using BusinessLogic.Mappers.DefMappers;
 using BusinessLogic.ViewModels.TodoModels;
 using BusinessLogic.Mappers;
 using BusinessLogic.ViewModels.UserModels;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +32,15 @@ builder.Services.AddScoped<IMapper<UserCreate, UserUpdate, UserResult, User>, Us
 
 builder.Services.AddTransient<ITodoService, TodoService>();
 builder.Services.AddTransient<IUserService, UserService>();
+
+
+builder.Services.AddBlazorise(options =>
+ {
+     options.Immediate = true;
+ })
+    .AddBootstrapProviders()
+    .AddFontAwesomeIcons();
+
 
 builder.Services.AddSingleton<WeatherForecastService>();
 

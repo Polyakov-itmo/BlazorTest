@@ -26,17 +26,16 @@ else
     }
 }
 
-<a href="users/create">
-    <button class="reset-button confirm-btn">
+<button class="reset-button confirm-btn">
+    <a href="users/create">
         Добавить
-    </button>
-</a>
+    </a>
+</button>
 
 
 
 @code {
     private IEnumerable<UserResult> allUsers = null;
-
 
 
     protected override async Task OnInitializedAsync()

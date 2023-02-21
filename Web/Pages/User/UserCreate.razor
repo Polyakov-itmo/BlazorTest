@@ -1,28 +1,78 @@
 ﻿@page "/users/create"
 @using BusinessLogic.Services
 @using DataAccess.Models;
+@using Web.Pages.Components;
+@using Blazorise;
 @inject IUserService userService
 
 
 
-<button class="reset-button back-btn theme-neutral">
-    <a href="users">
+<a href="users">
+    <button class="reset-button back-btn theme-neutral">
         Назад
-    </a>
-</button>
+    </button>
+</a>
 
 <h3>Создание пользователя</h3>
 
 <article class="input-title">Имя</article>
-<input class="input" type="text" @bind="@UserName"/>
 
+<input class="input" type="text" @bind="@UserName" />
+
+<TextInput Current="@te1" OnEnterKey="@OnEnter" />
+<TextInput Current="@te2" OnEnterKey="@OnEnter" />
+<TextInput Current="@te3" OnEnterKey="@OnEnter" />
+<TextInput Current="@te4" OnEnterKey="@OnEnter" />
+
+
+@*<TextEdit id=1 @ref="te1" OnEnterKey="@OnEnter" />
+<TextEdit @ref="te2" OnEnterKey="@OnEnter" />
+<TextEdit @ref="te3" OnEnterKey="@OnEnter" />
+<TextEdit @ref="te4" OnEnterKey="@OnEnter" />*@
 
 <button class="reset-button theme-primary" @onclick=@SubmitUser>Создать</button>
 
+@if(enters.Count() != 0)
+{
+    foreach(var enter in enters)
+    {
+        <p>@enter</p>
+    }
+}
+else
+{
+    <p>No</p>
+}
+
 
 @code {
+    private List<string> enters= new();
     public string UserName = "";
     public User user = new();
+
+    private TextEdit te1;
+    private TextEdit te2;
+    private TextEdit te3;
+    private TextEdit te4;
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            te1.Focus();
+        }
+
+        return Task.CompletedTask;
+    }
+    void OnEnter(KeyboardEventArgs e)
+    {
+
+        if (e.Code == "Enter")
+        {
+            te2.Focus();
+        }
+    }
+
 
     private bool CheckInputs(){
         if(!String.IsNullOrEmpty(UserName)){
@@ -34,6 +84,10 @@
     {
         UserName = "";
     }
+
+
+    
+
 
     public async Task SubmitUser(){
         if (CheckInputs())

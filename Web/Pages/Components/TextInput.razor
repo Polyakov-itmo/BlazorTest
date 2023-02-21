@@ -1,0 +1,26 @@
+﻿@using Blazorise;
+<h3>TextInput</h3>
+
+
+<TextEdit 
+    @ref="@Current"
+    KeyPress="@OnClick"
+/>
+
+
+@code {
+   
+
+    [Parameter]
+    public EventCallback<KeyboardEventArgs> OnEnterKey { get; set; }
+
+
+    public TextEdit Current { get; set; }
+
+    void OnClick()
+    {
+        
+        OnEnterKey.InvokeAsync();
+    }
+
+}
