@@ -3,24 +3,30 @@
 
 
 <TextEdit 
-    @ref="@Current"
     KeyPress="@OnClick"
 />
 
 
 @code {
-   
-
     [Parameter]
     public EventCallback<KeyboardEventArgs> OnEnterKey { get; set; }
+    [Parameter]
+    public EventCallback<KeyboardEventArgs> OnTabKey { get; set; }
 
-
-    public TextEdit Current { get; set; }
-
-    void OnClick()
+    void OnClick(KeyboardEventArgs e)
     {
-        
-        OnEnterKey.InvokeAsync();
+        if(e.Code == "Enter")
+        {
+            OnEnterKey.InvokeAsync(e);
+        }
+        if (e.Code == "KeyQ")
+        {
+            OnTabKey.InvokeAsync(e);
+        }
+        if(e.Code == "Tab")
+        {
+            OnTabKey.InvokeAsync(e);
+        }
     }
 
 }

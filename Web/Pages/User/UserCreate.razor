@@ -19,16 +19,11 @@
 
 <input class="input" type="text" @bind="@UserName" />
 
-<TextInput Current="@te1" OnEnterKey="@OnEnter" />
-<TextInput Current="@te2" OnEnterKey="@OnEnter" />
-<TextInput Current="@te3" OnEnterKey="@OnEnter" />
-<TextInput Current="@te4" OnEnterKey="@OnEnter" />
+<TextInput @ref="te1" OnEnterKey="@OnEnter" OnTabKey="@OnTab"/>
+<TextInput @ref="te2" OnEnterKey="@OnEnter" OnTabKey="@OnTab" />
+<TextInput @ref="te3" OnEnterKey="@OnEnter" OnTabKey="@OnTab" />
+<TextInput @ref="te4" OnEnterKey="@OnEnter" OnTabKey="@OnTab" />
 
-
-@*<TextEdit id=1 @ref="te1" OnEnterKey="@OnEnter" />
-<TextEdit @ref="te2" OnEnterKey="@OnEnter" />
-<TextEdit @ref="te3" OnEnterKey="@OnEnter" />
-<TextEdit @ref="te4" OnEnterKey="@OnEnter" />*@
 
 <button class="reset-button theme-primary" @onclick=@SubmitUser>Создать</button>
 
@@ -46,33 +41,29 @@ else
 
 
 @code {
+
+    #region State
     private List<string> enters= new();
     public string UserName = "";
     public User user = new();
 
-    private TextEdit te1;
-    private TextEdit te2;
-    private TextEdit te3;
-    private TextEdit te4;
+    private TextInput? te1;
+    private TextInput? te2;
+    private TextInput? te3;
+    private TextInput? te4;
+    #endregion
 
-    protected override Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            te1.Focus();
-        }
 
-        return Task.CompletedTask;
-    }
     void OnEnter(KeyboardEventArgs e)
     {
+        enters.Add("1");
 
-        if (e.Code == "Enter")
-        {
-            te2.Focus();
-        }
     }
 
+    void OnTab(KeyboardEventArgs e)
+    {
+        enters.Add("2");
+    }
 
     private bool CheckInputs(){
         if(!String.IsNullOrEmpty(UserName)){
@@ -80,24 +71,20 @@ else
         }
         return false;
     }
+
     public void ClearInputs()
     {
         UserName = "";
     }
 
-
-    
-
-
     public async Task SubmitUser(){
         if (CheckInputs())
         {
             var userToCreate = new BusinessLogic.ViewModels.UserModels.UserCreate()
-                {
-                    Name = UserName
-                };
+            {
+                Name = UserName
+            };
             ClearInputs();
-
             user = await userService.Create(userToCreate);
         }
     }
