@@ -38,6 +38,18 @@ namespace BusinessLogic.Services
             _repository = repository;
         }
 
+
+        public override async Task<IEnumerable<UserResult>?> GetAll()
+        {
+            return await _repository._dbSet
+                 .Select(x => new UserResult()
+                 {
+                     Name = x.Name,
+                     TodoCount = x.Todos == null ? 0 : x.Todos.Count,
+                 })
+                 .ToListAsync();
+        }
+
         public async Task<UserTodosResult?> GetWithTodos(int id)
         {
             return await _repository._dbSet
@@ -57,5 +69,8 @@ namespace BusinessLogic.Services
                         .ToList()
                 }).FirstAsync();
         }
+
+
+
     }
 }

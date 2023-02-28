@@ -9,7 +9,7 @@ namespace DataAccess.Models
 {
     public class User : IdModel
     {
-        public string? Name { get; set; } = null;
-        public List<Todo> Todos { get; set; } = new();
+        public string? Name { get; set; }
+        public List<Todo>? Todos { get; set; } = new();
     }
 }

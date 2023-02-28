@@ -1,0 +1,24 @@
+﻿@using BusinessLogic.ViewModels.UserModels;
+
+<a href="@Routes.User + @User.Id">
+    <div class="user-card">
+        <article class="user-card__index">
+            @(Index + 1)
+        </article>
+        <div class="user-card__name">
+            @User.Name
+        </div>
+        <div class="user-card__todos-count">
+            @User.TodoCount
+        </div>
+    </div>
+</a>
+
+@code {
+    [Parameter]
+    public int Index { get; set; }
+    [Parameter]
+    public UserResult User { get; set; }
+
+
+}

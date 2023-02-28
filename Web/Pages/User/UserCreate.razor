@@ -19,51 +19,15 @@
 
 <input class="input" type="text" @bind="@UserName" />
 
-<TextInput @ref="te1" OnEnterKey="@OnEnter" OnTabKey="@OnTab"/>
-<TextInput @ref="te2" OnEnterKey="@OnEnter" OnTabKey="@OnTab" />
-<TextInput @ref="te3" OnEnterKey="@OnEnter" OnTabKey="@OnTab" />
-<TextInput @ref="te4" OnEnterKey="@OnEnter" OnTabKey="@OnTab" />
-
-
 <button class="reset-button theme-primary" @onclick=@SubmitUser>Создать</button>
-
-@if(enters.Count() != 0)
-{
-    foreach(var enter in enters)
-    {
-        <p>@enter</p>
-    }
-}
-else
-{
-    <p>No</p>
-}
 
 
 @code {
 
     #region State
-    private List<string> enters= new();
     public string UserName = "";
-    public User user = new();
-
-    private TextInput? te1;
-    private TextInput? te2;
-    private TextInput? te3;
-    private TextInput? te4;
+    public User? user;
     #endregion
-
-
-    void OnEnter(KeyboardEventArgs e)
-    {
-        enters.Add("1");
-
-    }
-
-    void OnTab(KeyboardEventArgs e)
-    {
-        enters.Add("2");
-    }
 
     private bool CheckInputs(){
         if(!String.IsNullOrEmpty(UserName)){
@@ -78,14 +42,13 @@ else
     }
 
     public async Task SubmitUser(){
+        BusinessLogic.ViewModels.UserModels.UserCreate userToCreate = new();
         if (CheckInputs())
         {
-            var userToCreate = new BusinessLogic.ViewModels.UserModels.UserCreate()
-            {
-                Name = UserName
-            };
+            userToCreate.Name = UserName;
             ClearInputs();
             user = await userService.Create(userToCreate);
         }
+
     }
 }

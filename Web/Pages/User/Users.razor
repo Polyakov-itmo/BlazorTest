@@ -1,46 +1,72 @@
-﻿@page "/users"
+﻿@page "/users";
 @using BusinessLogic.Services;
+@using Web;
 @using BusinessLogic.ViewModels.UserModels;
 @using Web.Shared.Components;
+@using Web.Pages.Components;
+@using static BusinessLogic.Services.UserService;
 @inject IUserService _userService;
 
 
 <PageTitle>Users</PageTitle>
 
-@if (allUsers is null || allUsers.Count() == 0)
+
+@if (allUsers == null)
 {
-    <Notice Title="У вас пока нет пользователей" />
+    <div class="spinner-1"></div>
 }
 else
 {
-    @foreach(UserResult user in allUsers)
+    @if (allUsers.Count() == 0)
     {
-        <div class="user-card">
-            <div>
-                @user.Id
-            </div>
-            <div>
-                @user.Name
-            </div>
+        <Notice Title="У вас пока нет пользователей" />
+        <button class="reset-button confirm-btn">
+            <a href="@Routes.UserCreate">
+                Добавить
+            </a>
+        </button>
+    }
+    else
+    {
+        <button class="reset-button confirm-btn">
+            <a href="@Routes.UserCreate">
+                Добавить
+            </a>
+        </button>
+        <div class="users-list">
+        <p>
+            Количество пользователей: @allUsers.Count()
+        </p>
+        <div class="users-list__content">
+            @foreach (UserResult user in allUsers)
+            {
+                <UserListCard User="@user" Index="@allUsers.IndexOf(user)" />
+            }
         </div>
+    </div>
     }
 }
 
-<button class="reset-button confirm-btn">
-    <a href="users/create">
-        Добавить
-    </a>
-</button>
 
 
 
 @code {
-    private IEnumerable<UserResult> allUsers = null;
+    private List<UserResult>? allUsers;
 
 
     protected override async Task OnInitializedAsync()
     {
-        allUsers = await _userService.GetAll();
+        await Task.Run(LoadEmployees);
+
+        var result = await _userService.GetAll();
+        allUsers = result!.ToList();
+        base.OnInitializedAsync();
     }
 
+
+
+    private void LoadEmployees()
+    {
+        System.Threading.Thread.Sleep(1000);
+    }
 }

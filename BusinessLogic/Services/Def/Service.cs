@@ -52,7 +52,7 @@ namespace BusinessLogic.Services.Def
             return _mapper.MapResult(result!);
         }
 
-        public async Task<IEnumerable<TResult>?> GetAll()
+        public virtual async Task<IEnumerable<TResult>?> GetAll()
         {
             var models = await GetAllInternal();
             return models!.Select(x => _mapper.MapResult(x));

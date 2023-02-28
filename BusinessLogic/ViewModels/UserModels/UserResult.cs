@@ -10,5 +10,7 @@ namespace BusinessLogic.ViewModels.UserModels
     public class UserResult : IdModel
     {
         public string? Name { get; set; } = null;
+
+        public int TodoCount { get; set; }
     }
 }
