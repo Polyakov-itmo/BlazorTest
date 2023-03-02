@@ -40,6 +40,16 @@ namespace BusinessLogic.Mappers
                 UserName = model.User.Name
             };
         }
+        public TodoResult MapListResult(Todo model)
+        {
+            return new TodoResult()
+            {
+                Id = model.Id,
+                Text = model.Text,
+                UserName = model.User.Name
+            };
+        }
+
     }
 
 }

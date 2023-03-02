@@ -27,8 +27,8 @@ builder.Services.ConfigureSqlServerContext(builder.Configuration);
 builder.Services.AddScoped<IRepository<Todo>, TodoRepository>();
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
 
-builder.Services.AddScoped<IMapper<TodoCreate, TodoUpdate, TodoResult, Todo>, TodoMapper>();
-builder.Services.AddScoped<IMapper<UserCreate, UserUpdate, UserResult, User>, UserMapper>();
+builder.Services.AddScoped<IMapper<TodoCreate, TodoUpdate, TodoResult, TodoResult,Todo>, TodoMapper>();
+builder.Services.AddScoped<IMapper<UserCreate, UserUpdate, UserResult, UserListResult, User>, UserMapper>();
 
 builder.Services.AddTransient<ITodoService, TodoService>();
 builder.Services.AddTransient<IUserService, UserService>();

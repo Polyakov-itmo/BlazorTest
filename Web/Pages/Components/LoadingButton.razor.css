@@ -1,0 +1,21 @@
+﻿
+.button-loader {
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    animation: ButtonSpin 900ms linear infinite;
+}
+
+@keyframes ButtonSpin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}

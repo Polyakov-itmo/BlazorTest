@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
-    public interface IUserService : IService<UserCreate, UserUpdate, UserResult, User> { }
+    public interface IUserService : IService<UserCreate, UserUpdate, UserResult, UserListResult, User> {
+    
+    
+    }
 
 }

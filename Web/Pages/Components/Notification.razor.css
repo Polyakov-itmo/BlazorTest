@@ -1,0 +1,39 @@
+﻿.notification{
+    width: 400px;
+    height: 100px;
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    display: flex;
+    box-shadow: 3px 3px 20px #9c9c9c;
+    cursor: pointer;
+}
+
+.notification-side{
+    width: 10px;
+    height: 100%;
+}
+
+.notification-content{
+    padding: 10px;
+}
+
+.notification-side__success {
+    background-color: #00ff21;
+}
+
+.notification-side__error {
+    background-color: #ff0000;
+}
+
+.notification-side__fail {
+    background-color: #ce6d10;
+}
+
+.notification-side__warning {
+    background-color: #ffd800;
+}
+
+.notification-side__default {
+    background-color: #000000;
+}

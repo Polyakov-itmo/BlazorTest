@@ -18,13 +18,20 @@ namespace BusinessLogic.Mappers
 
         public UserResult MapResult(User model)
         {
-            return new UserResult() { Name = model.Name };
+            return new UserResult() { Id = model.Id, Name = model.Name, Todos = model.Todos };
+        }
+
+        public UserListResult MapListResult(User model)
+        {
+            return new UserListResult() { Id = model.Id,Name = model.Name, TodoCount = model.Todos.Count()};
         }
 
         public User UpdateMap(UserUpdate updateModel)
         {
             return new User() { Id = updateModel.Id, Name = updateModel.Name };
         }
+
+
     }
 
 }

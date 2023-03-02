@@ -1,4 +1,4 @@
-﻿namespace Web
+﻿namespace Web.Infrastructure
 {
     public static class Routes
     {

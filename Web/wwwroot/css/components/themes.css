@@ -1,11 +1,51 @@
 ﻿
 
+/*Primary*/
 .theme-primary {
     background-color: #1a2cff;
     color: white;
 }
 
+.theme-primary_h {
+    background-color: #1a2cff;
+    color: white;
+}
+
+.theme-primary_h:hover {
+    background-color: #000fb5;
+}
+/*Primary*/
+
+
+/*Danger*/
+.theme-danger {
+    color: white;
+    background-color: #cc2020;
+}
+
+.theme-danger_h {
+    color: white;
+    background-color: #cc2020;
+}
+
+.theme-danger_h:hover {
+    background-color: #970a0a;
+}
+/*Danger*/
+
+
+/*Neutral*/
 .theme-neutral {
     color: #7a7a7a;
     background-color: #e5e5e5;
 }
+
+.theme-neutral_h {
+    color: #7a7a7a;
+    background-color: #e5e5e5;
+}
+
+.theme-neutral_h:hover {
+    background-color: #c2c2c2;
+}
+/*Neutral*/

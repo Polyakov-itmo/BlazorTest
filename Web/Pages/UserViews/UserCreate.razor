@@ -1,0 +1,32 @@
+﻿@page "/users/create"
+@using Web.Infrastructure;
+@using Web.Pages.Components
+
+
+<LinkButton 
+    Url="@Routes.User"
+    Text="Назад"
+    Style="@Themes.NeutralHover" 
+/>
+
+
+<h3>Создание пользователя</h3>
+<article class="input-title">Имя</article>
+<input class="input" type="text" @bind="@UserName" />
+
+<LoadingButton 
+    Text="Создать"
+    Callback="@SubmitUser"
+    Show="@Creating" 
+    Style="@Themes.Primary"
+/>
+
+@if (isNotify)
+{
+    <Notification 
+        Status="@NotificationStatus"
+        Title="@NotificationTitle"
+        SubTitle="@NotificationSubTitle" 
+    />
+}
+

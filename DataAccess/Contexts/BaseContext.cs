@@ -12,6 +12,7 @@ namespace DataAccess.Contexts
     {
         public DbSet<Todo> Todos => Set<Todo>();
         public DbSet<User> Users => Set<User>();
+        public BaseContext(){}
         public BaseContext(DbContextOptions<BaseContext> opt) : base(opt)
         {
             Database.EnsureDeleted();

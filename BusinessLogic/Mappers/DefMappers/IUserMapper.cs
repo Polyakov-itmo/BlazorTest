@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Mappers.DefMappers
 {
-    public interface IUserMapper : IMapper<UserCreate, UserUpdate, UserResult, User> { }
+    public interface IUserMapper : IMapper<UserCreate, UserUpdate, UserResult, UserListResult, User> { }
 }

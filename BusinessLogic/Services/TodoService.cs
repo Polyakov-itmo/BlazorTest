@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
-    public class TodoService : Service<TodoCreate, TodoUpdate, TodoResult, Todo>, ITodoService
+    public class TodoService : Service<TodoCreate, TodoUpdate, TodoResult, TodoResult, Todo>, ITodoService
     {
         private readonly IRepository<Todo> _repository;
 
         public TodoService(
             IRepository<Todo> repository,
-            IMapper<TodoCreate, TodoUpdate, TodoResult, Todo> mapper
+            IMapper<TodoCreate, TodoUpdate, TodoResult, TodoResult, Todo> mapper
         )
             : base(repository, mapper) 
         {

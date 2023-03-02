@@ -1,0 +1,27 @@
+﻿@page "/users/{UserId:int}"
+@using BusinessLogic.Services;
+@using Web.Infrastructure;
+@using Web.Pages.Components
+
+@inject IUserService _userService;
+
+
+<LinkButton 
+    Url="@Routes.User" 
+    Text="Назад" 
+    Style="@Themes.NeutralHover"/>
+
+<article class="input-title">Имя</article>
+
+@code {
+    [Parameter]
+    public int UserId { get; set; }
+    private bool EditMode = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await _userService.Get(UserId);
+
+    }
+
+}

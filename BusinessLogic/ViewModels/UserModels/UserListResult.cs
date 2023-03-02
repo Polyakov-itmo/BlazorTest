@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.ViewModels.UserModels
 {
-    public class UserResult : User
+    public class UserListResult : IdModel
     {
-       
+        public string? Name { get; set; } = null;
+
+        public int TodoCount { get; set; }
     }
 }

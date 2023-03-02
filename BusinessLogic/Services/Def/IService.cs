@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services.Def
 {
-    public interface IService<TCreate, TUpdate, TResult, TModel> : IServiceInternal<TModel> where TModel : IdModel
+    public interface IService<TCreate, TUpdate, TResult, TListResult, TModel> : IServiceInternal<TModel> where TModel : IdModel
     {
         Task<TModel> Create(TCreate createModel);
         Task CreateRange(IEnumerable<TCreate> createModels);
         Task<TModel?> Delete(int id);
         Task<TResult?> Get(int id);
-        Task<IEnumerable<TResult>?> GetAll();
+        Task<IEnumerable<TListResult>?> GetAll();
         // Task<Todo> Update(TUpdate model);
     }
 }

@@ -1,0 +1,14 @@
+﻿@using Web.Pages.Components.Base;
+@inherits TextComponentBase
+
+
+<button class="reset-button theme-primary" @onclick=@OnCLickEvent>
+    @if (Show)
+    {
+        <div class="button-loader"></div>
+    }
+    else
+    {
+        <span>@Text</span>
+    }
+</button>

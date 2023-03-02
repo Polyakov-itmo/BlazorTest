@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services.Def
 {
-    public class Service<TCreate, TUpdate, TResult, TModel> : ServiceInternal<TModel>, IService<TCreate, TUpdate, TResult, TModel> where TModel : IdModel
+    public class Service<TCreate, TUpdate, TResult, TListResult, TModel> : ServiceInternal<TModel>, IService<TCreate, TUpdate, TResult, TListResult, TModel> where TModel : IdModel
     {
         private IRepository<TModel> _repository;
-        private IMapper<TCreate, TUpdate, TResult, TModel> _mapper;
+        private IMapper<TCreate, TUpdate, TResult, TListResult, TModel> _mapper;
 
         public Service(
             IRepository<TModel> repository,
-            IMapper<TCreate, TUpdate, TResult, TModel> mapper
+            IMapper<TCreate, TUpdate, TResult, TListResult, TModel> mapper
         )
             : base(repository)
         {
@@ -46,16 +46,17 @@ namespace BusinessLogic.Services.Def
         public async Task<TResult?> Get(int id)
         {
             var result = await _repository._dbSet
+                .AsNoTracking()
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             return _mapper.MapResult(result!);
         }
 
-        public virtual async Task<IEnumerable<TResult>?> GetAll()
+        public virtual async Task<IEnumerable<TListResult>?> GetAll()
         {
             var models = await GetAllInternal();
-            return models!.Select(x => _mapper.MapResult(x));
+            return models!.Select(x => _mapper.MapListResult(x));
         }
 
         // Task<Todo> Update(TUpdate model);

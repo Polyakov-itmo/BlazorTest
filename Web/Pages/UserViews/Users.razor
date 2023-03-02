@@ -1,0 +1,52 @@
+﻿@page "/users";
+@using DataAccess;
+@using Web;
+@using BusinessLogic.ViewModels.UserModels;
+@using Web.Infrastructure;
+@using Web.Pages.Components;
+
+<PageTitle>Users</PageTitle>
+
+@if (allUsers == null)
+{
+    <PageLoader />
+}
+else
+{
+    @if (allUsers.Count() == 0)
+    {
+        <Notice 
+            Text="У вас пока нет пользователей" 
+            Style="@Themes.Neutral"
+        />
+        <LinkButton 
+            Url="@Routes.UserCreate" 
+            Text="Добавить"
+            Style="@Themes.PrimaryHover" />
+    }
+    else
+    {
+        <LinkButton 
+            Url="@Routes.UserCreate" 
+            Text="Добавить"
+            Style="@Themes.PrimaryHover" 
+        />
+        <div class="users-list">
+            <p>
+                Количество пользователей: @allUsers.Count()
+            </p>
+            <div class="users-list__content">
+                @foreach (UserListResult user in allUsers)
+                {
+                    <UserListCard 
+                        User="@user" 
+                        Index="@allUsers.IndexOf(user)"
+                        Deleting="@IsDeleting"
+                        Callback="@Delete"
+                    />
+                }
+            </div>
+        </div>
+    }
+}
+

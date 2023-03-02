@@ -11,10 +11,10 @@ namespace DataAccess.Repositories.Def
 {
     public abstract class Repository<TModel> : IRepository<TModel> where TModel : IdModel
     {
-        private DbContext _context { get; set; }
+        private BaseContext _context { get; set; }
         public DbSet<TModel> _dbSet { get; }
 
-        public Repository(DbContext context)
+        public Repository(BaseContext context)
         {
             _context = context;
             _dbSet = context.Set<TModel>();
@@ -27,7 +27,6 @@ namespace DataAccess.Repositories.Def
 
         public virtual async Task<TModel?> GetFirst()
         {
-            // return await _context.Set<TModel>().FindAsync(id);
             return await _dbSet.AsNoTracking().FirstAsync();
         }
 
@@ -56,14 +55,28 @@ namespace DataAccess.Repositories.Def
 
         public virtual async Task<TModel?> Delete(int id)
         {
-            var model = await Get(id);
-            if (model is not null)
+            bool os = false;
+            try
             {
-                var deletedModel = _dbSet.Remove(model).Entity;
-                Save();
-                return deletedModel;
+                var model = await Get(id);
+                var state = _context.Entry(model).State;
+               
+                if (model is not null)
+                {
+                    _context.Entry(model).State = EntityState.Deleted;
+                    Save();
+                    return model;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            return null;
+            catch(Exception ex)
+            {
+                throw;
+            }
+            
         }
 
         public virtual async Task DeleteAll()
