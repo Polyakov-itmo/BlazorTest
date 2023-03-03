@@ -3,6 +3,9 @@
 
 <div class="user-card">
     <article class="user-card__index">
+        @User.Id
+    </article>
+    <article class="user-card__index">
         @(Index + 1)
     </article>
     <div class="user-card__name">
@@ -11,10 +14,12 @@
     <div class="user-card__todos-count">
         @User.TodoCount
     </div>
-    <LoadingButton Text="Удалить"
-                   Callback="@Click"
-                   Show="@Deleting"
-                   Style="@Themes.DangerHover" />
+    <LoadingButton 
+        Text="Удалить"
+        Callback="@Click"
+        Show="@Deleting"
+        Style="@Themes.DangerHover" 
+    />
 
 </div>
 

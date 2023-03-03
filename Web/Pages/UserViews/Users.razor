@@ -31,21 +31,24 @@ else
             Text="Добавить"
             Style="@Themes.PrimaryHover" 
         />
-        <div class="users-list">
-            <p>
+        <div class="users__container">
+            <div class="users-list">
+                <p>
                 Количество пользователей: @allUsers.Count()
-            </p>
-            <div class="users-list__content">
-                @foreach (UserListResult user in allUsers)
-                {
-                    <UserListCard 
-                        User="@user" 
-                        Index="@allUsers.IndexOf(user)"
-                        Deleting="@IsDeleting"
-                        Callback="@Delete"
-                    />
-                }
+                </p>
+                <div class="users-list__content">
+                    @foreach (UserListResult user in allUsers)
+                    {
+                        <UserListCard 
+                            User="@user" 
+                            Index="@allUsers.IndexOf(user)"
+                            Deleting="@IsDeleting"
+                            Callback="@Delete"
+                        />
+                    }   
+                </div>
             </div>
+            
         </div>
     }
 }

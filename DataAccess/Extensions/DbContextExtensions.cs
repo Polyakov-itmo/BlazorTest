@@ -12,11 +12,11 @@ namespace DataAccess.Extensions
 {
     public static class DbContextExtensions
     {
-        /*public static void ConfigureSqLiteContext(this IServiceCollection services, IConfiguration config)
+        public static void ConfigureSqLiteContext(this IServiceCollection services, IConfiguration config)
         {
             services.AddDbContext<BaseContext>(opt =>
-            opt.UseSqlServer(config.GetConnectionString("test")));
-        }*/
+                opt.UseSqlite(config.GetConnectionString("sqlite")));
+        }
 
         public static void ConfigureSqlServerContext(this IServiceCollection services, IConfiguration config)
         {

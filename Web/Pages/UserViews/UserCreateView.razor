@@ -11,8 +11,10 @@
 
 
 <h3>Создание пользователя</h3>
+
 <article class="input-title">Имя</article>
-<input class="input" type="text" @bind="@UserName" />
+<input class="input" type="text" @bind="@userToCreate.Name" />
+
 
 <LoadingButton 
     Text="Создать"

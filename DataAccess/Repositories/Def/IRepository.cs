@@ -18,7 +18,7 @@ namespace DataAccess.Repositories.Def
         Task<T?> Delete(int id);
         Task DeleteAll();
        /* Task<T?> Update(T model);*/
-        void Save();
+        Task Save();
         public void Info();
     }
 }

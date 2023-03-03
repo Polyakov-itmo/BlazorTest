@@ -43,28 +43,29 @@ namespace DataAccess.Repositories.Def
         public virtual async Task<TModel?> Create(TModel model)
         {
             var addedModel = (await _dbSet.AddAsync(model)).Entity;
-            Save();
+            await Save();
             return addedModel;
         }
 
         public virtual async Task CreateRange(IEnumerable<TModel> models)
         {
             await _dbSet.AddRangeAsync(models);
-            Save();
+            await Save();
         }
 
         public virtual async Task<TModel?> Delete(int id)
         {
-            bool os = false;
             try
             {
-                var model = await Get(id);
-                var state = _context.Entry(model).State;
-               
+                var model = await _dbSet
+                    .Where(x => x.Id == id)
+                    .FirstOrDefaultAsync();
+
+                //var os = 
                 if (model is not null)
                 {
-                    _context.Entry(model).State = EntityState.Deleted;
-                    Save();
+                    _dbSet.Remove(model);
+                    await Save();
                     return model;
                 }
                 else
@@ -85,9 +86,9 @@ namespace DataAccess.Repositories.Def
         }
 
 
-        public virtual void Save()
+        public virtual async Task Save()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

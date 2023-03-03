@@ -1,15 +1,16 @@
 ﻿
 .users-list {
-    margin: 20px 0 0 0;
+    margin: 10px 0 0 0;
     background-color: #a1baff;
     border-radius: 5px;
     padding: 20px;
     max-width: 600px;
 }
 
-    .users-list p {
-        background-color: transparent;
-    }
+.users-list p {
+    background-color: transparent;
+}
 
 .users-list__content {
+    padding: 10px;
 }

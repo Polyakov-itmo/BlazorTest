@@ -22,7 +22,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.ConfigureSqlServerContext(builder.Configuration);
+builder.Services.ConfigureSqLiteContext(builder.Configuration);
+//builder.Services.ConfigureSqlServerContext(builder.Configuration);
 
 builder.Services.AddScoped<IRepository<Todo>, TodoRepository>();
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
