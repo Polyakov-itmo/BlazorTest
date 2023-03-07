@@ -7,5 +7,6 @@
 
 
         public static string Todo { get; } = "/todos";
+        public static string TodoCreate => Todo + "/create";
     }
 }

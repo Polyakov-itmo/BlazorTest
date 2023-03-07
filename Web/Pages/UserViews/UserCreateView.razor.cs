@@ -12,7 +12,6 @@ namespace Web.Pages.UserViews
         #region[State]
         public UserCreate userToCreate = new();
         public User? CreatedUser;
-        private bool Creating = false;
         private bool isNotify = false;
         #endregion[State]
 
@@ -43,14 +42,10 @@ namespace Web.Pages.UserViews
         {
             if (CheckInputs())
             {
-                Creating = true;
-
                 //await Task.Run(Load._delay1);
 
                 CreatedUser = await _userService.Create(userToCreate);
                 ClearInputs();
-
-                Creating = false;
 
                 await ShowNotify(NotificationStatusEnum.Succes);
             }

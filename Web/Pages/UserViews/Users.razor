@@ -37,13 +37,13 @@ else
                 Количество пользователей: @allUsers.Count()
                 </p>
                 <div class="users-list__content">
-                    @foreach (UserListResult user in allUsers)
+                    @foreach (var user in allUsers)
                     {
-                        <UserListCard 
-                            User="@user" 
+                        <UserListCard
+                            User="@user.user"
+                            IsDeleting="@user.isDeleting"
                             Index="@allUsers.IndexOf(user)"
-                            Deleting="@IsDeleting"
-                            Callback="@Delete"
+                            Delete="@Delete"
                         />
                     }   
                 </div>

@@ -61,7 +61,6 @@ namespace DataAccess.Repositories.Def
                     .Where(x => x.Id == id)
                     .FirstOrDefaultAsync();
 
-                //var os = 
                 if (model is not null)
                 {
                     _dbSet.Remove(model);

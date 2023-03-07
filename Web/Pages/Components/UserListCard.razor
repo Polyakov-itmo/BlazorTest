@@ -17,7 +17,6 @@
     <LoadingButton 
         Text="Удалить"
         Callback="@Click"
-        Show="@Deleting"
         Style="@Themes.DangerHover" 
     />
 
@@ -26,25 +25,29 @@
 
 
 @code {
-    #region Params
+
+    #region [State]
+    #endregion[State]
+
+    #region [Params]
+    [Parameter]
+    public bool IsDeleting { get; set; }
     [Parameter]
     public int Index { get; set; }
     [Parameter]
     public UserListResult User { get; set; }
     [Parameter]
-    public EventCallback<int> Callback { get; set; }
-    [Parameter]
-    public bool Deleting { get; set; }
-    #endregion
+    public EventCallback<int> Delete { get; set; }
+    #endregion [Params]
 
-    private void Click()
+    private async Task Click()
     {
-        Callback.InvokeAsync(User.Id);
+        await Delete.InvokeAsync(User.Id);
     }
 
 
     /*<a href="/users/@User.Id">
-
+     * 
     </a>*/
 
 }

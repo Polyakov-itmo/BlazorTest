@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Services;
 using BusinessLogic.ViewModels.UserModels;
 using DataAccess;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace Web.Pages.UserViews
@@ -10,32 +11,33 @@ namespace Web.Pages.UserViews
         [Inject]
         protected IUserService _userService { get; set; }
 
-        private List<UserListResult>? allUsers;
-        private bool IsDeleting = false;
+        private List<(UserListResult user, bool isDeleting)>? allUsers;
         protected override async Task OnInitializedAsync()
         {
             /*await Task.Run(Load._delay1);*/
 
-            var result = await _userService.GetAll();
-            allUsers = result!.ToList();
+            await LoadUsers();
             await base.OnInitializedAsync();
+        }
+
+        public async Task LoadUsers()
+        {
+            var result = await _userService.GetAll();
+
+            if(result is not null) {
+                allUsers = result.Select(x => (user: x, isDeleting: false)).ToList();
+            }
         }
 
         public async Task Delete(int id)
         {
-            IsDeleting= true;
             var deletedUser = await _userService.Delete(id);
-            IsDeleting = false;
+            //await Task.Run(Load._delay1);
+
             if (deletedUser != null)
             {
-                var users = await _userService.GetAll();
-                if(users != null)
-                {
-                    allUsers = users!.ToList();
-                }
+                await LoadUsers();
             }
-            IsDeleting = false;
         }
-
     }
 }

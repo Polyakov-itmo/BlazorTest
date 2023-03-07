@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Mappers.DefMappers
 {
-    public interface ITodoMapper : IMapper<TodoCreate, TodoUpdate, TodoResult, TodoResult, Todo> { }
+    public interface ITodoMapper : IMapper<TodoCreate, TodoUpdate, TodoResult, TodoListResult, Todo> { }
 
 }

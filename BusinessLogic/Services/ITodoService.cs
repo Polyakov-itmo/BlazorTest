@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
-    public interface ITodoService : IService<TodoCreate, TodoUpdate, TodoResult, TodoResult,Todo>
+    public interface ITodoService : IService<TodoCreate, TodoUpdate, TodoResult, TodoListResult,Todo>
     {
     }
 }

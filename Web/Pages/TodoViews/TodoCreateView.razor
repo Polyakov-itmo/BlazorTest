@@ -1,0 +1,24 @@
+﻿@page "/todos/create"
+@using Web.Infrastructure;
+@using Web.Pages.Components
+<h3>TodoCreateView</h3>
+
+
+<LinkButton 
+    Url="@Routes.Todo"
+    Text="Назад"
+    Style="@Themes.NeutralHover" 
+/>
+
+
+<h3>Создание задание</h3>
+
+<article class="input-title">Текст задания</article>
+<input class="input" type="text" @bind="@todoToCreate.Text" />
+
+<article class="input-title">Статус</article>
+<input class="input" type="checkbox" @bind="@todoToCreate.IsDone" />
+
+<div>
+    @todoToCreate.IsDone
+</div>

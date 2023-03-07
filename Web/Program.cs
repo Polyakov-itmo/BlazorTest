@@ -28,7 +28,7 @@ builder.Services.ConfigureSqLiteContext(builder.Configuration);
 builder.Services.AddScoped<IRepository<Todo>, TodoRepository>();
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
 
-builder.Services.AddScoped<IMapper<TodoCreate, TodoUpdate, TodoResult, TodoResult,Todo>, TodoMapper>();
+builder.Services.AddScoped<IMapper<TodoCreate, TodoUpdate, TodoResult, TodoListResult,Todo>, TodoMapper>();
 builder.Services.AddScoped<IMapper<UserCreate, UserUpdate, UserResult, UserListResult, User>, UserMapper>();
 
 builder.Services.AddTransient<ITodoService, TodoService>();

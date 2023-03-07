@@ -6,16 +6,19 @@ namespace Web.Pages.Components
 {
     public partial class LoadingButton : TextComponentBase
     {
+        #region [State]
+        #endregion [State]
+
         #region Params
         [Parameter]
-        public EventCallback<MouseEventArgs> Callback { get; set; }
-        [Parameter]
         public bool Show { get; set; }
+        [Parameter]
+        public EventCallback<MouseEventArgs> Callback { get; set; }
         #endregion
 
-        public void OnCLickEvent()
+        public async Task OnCLickEvent()
         {
-            Callback.InvokeAsync();
+            await Callback.InvokeAsync();
         }
     }
 }
