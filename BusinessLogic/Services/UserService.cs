@@ -2,6 +2,8 @@
 using BusinessLogic.Services.Def;
 using BusinessLogic.ViewModels.UserModels;
 using DataAccess.Models;
+using DataAccess.Models.Def;
+using DataAccess.Repositories;
 using DataAccess.Repositories.Def;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,18 +16,28 @@ namespace BusinessLogic.Services
 {
     public class UserService : Service<UserCreate, UserUpdate, UserResult, UserListResult, User>, IUserService
     {
-        private readonly IRepository<User> _repository;
+        private readonly IRepository<User> _userRepository;
 
         public UserService(
-            IRepository<User> repository,
+            IRepository<User> userRepository,
             IMapper<UserCreate, UserUpdate, UserResult, UserListResult, User> mapper
         )
-            : base(repository, mapper)
+            : base(userRepository, mapper)
         {
-            _repository = repository;
+            _userRepository = userRepository;
         }
 
-        //public async Task
+        public async Task<IEnumerable<NameModel>> ListSelection()
+        {
+            return await _userRepository._dbSet
+                .Select(x => new NameModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                })
+                .ToListAsync();
+
+        }
 
     }
 }

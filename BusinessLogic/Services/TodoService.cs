@@ -2,6 +2,7 @@
 using BusinessLogic.Services.Def;
 using BusinessLogic.ViewModels.TodoModels;
 using DataAccess.Models;
+using DataAccess.Models.Def;
 using DataAccess.Repositories.Def;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -39,6 +40,18 @@ namespace BusinessLogic.Services
                     UserName = x.User.Name
                 })
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<NameModel>> ListSelection()
+        {
+            return await todoRepository._dbSet
+                .Select(x => new NameModel()
+                {
+                    Id = x.Id,
+                    Name = x.Text,
+                })
+                .ToListAsync();
+
         }
 
     }

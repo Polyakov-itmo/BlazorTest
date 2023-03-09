@@ -19,6 +19,29 @@
 <article class="input-title">Статус</article>
 <input class="input" type="checkbox" @bind="@todoToCreate.IsDone" />
 
+
+<article class="input-title">Пользователи</article>
+<select @bind="@todoToCreate.UserId">
+    @if (userSelection is not null)
+    {
+        @foreach (var user in userSelection)
+        {
+            <option value="@user.Id">@user.Name</option>
+        }
+    }
+    else
+    {
+        <option value="0">пусто</option>
+    }
+</select>
+
 <div>
-    @todoToCreate.IsDone
+    @isCreated
 </div>
+
+<LoadingButton 
+    Callback="@CreateTodo"
+    Show="@false"
+    Style="@Themes.PrimaryHover"
+    Text="Создать"
+    />

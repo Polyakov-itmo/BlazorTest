@@ -15,6 +15,7 @@ namespace BusinessLogic.Services.Def
         Task<TModel?> Delete(int id);
         Task<TResult?> Get(int id);
         Task<IEnumerable<TListResult>?> GetAll();
+
         // Task<Todo> Update(TUpdate model);
     }
 }
