@@ -12,8 +12,8 @@ namespace BusinessLogic.Services.Def.Internal
         Task<IEnumerable<TModel>?> GetAllInternal();
         Task<TModel?> CreateInternal(TModel model);
         Task CreateRangeInternal(IEnumerable<TModel> models);
+        Task<TModel?> DeleteInternal(int id);
         //::TODO сделать операция обновления
         // Task<TModel?> Update(TModel model);
-        Task<TModel?> DeleteInternal(int id);
     }
 }

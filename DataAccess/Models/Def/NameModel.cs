@@ -8,6 +8,6 @@ namespace DataAccess.Models.Def
 {
     public class NameModel : IdModel, INameModel
     {
-        public string Name { get; set ; }
+        public string Name { get; set;}
     }
 }

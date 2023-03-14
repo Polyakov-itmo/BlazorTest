@@ -12,7 +12,5 @@ namespace BusinessLogic.Services
 {
     public interface ITodoService : IService<TodoCreate, TodoUpdate, TodoResult, TodoListResult,Todo>
     {
-
-        public Task<IEnumerable<NameModel>> ListSelection();
     }
 }

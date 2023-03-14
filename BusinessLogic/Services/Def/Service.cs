@@ -28,24 +28,24 @@ namespace BusinessLogic.Services.Def
 
         
 
-        public async Task<TModel> Create(TCreate createModel)
+        public virtual async Task<TModel> Create(TCreate createModel)
         {
             var model = _mapper.CreateMap(createModel);
             return await CreateInternal(model);
         }
 
-        public async Task CreateRange(IEnumerable<TCreate> createModels)
+        public virtual async Task CreateRange(IEnumerable<TCreate> createModels)
         {
             var models = createModels.ToList().Select(x => _mapper.CreateMap(x));
             await CreateRangeInternal(models!);
         }
 
-        public async Task<TModel?> Delete(int id)
+        public virtual async Task<TModel?> Delete(int id)
         {
             return await DeleteInternal(id);
         }
 
-        public async Task<TResult?> Get(int id)
+        public virtual async Task<TResult?> Get(int id)
         {
             var result = await _repository._dbSet
                 .AsNoTracking()

@@ -11,6 +11,6 @@ namespace BusinessLogic.ViewModels.TodoModels
     {
         public string? Text { get; set; } = null;
         public bool IsDone { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 }

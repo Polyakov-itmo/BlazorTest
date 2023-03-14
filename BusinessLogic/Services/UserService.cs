@@ -27,8 +27,22 @@ namespace BusinessLogic.Services
             _userRepository = userRepository;
         }
 
+
+        public override async Task<IEnumerable<UserListResult>?> GetAll()
+        {
+            return await _userRepository._dbSet
+                .Select(x => new UserListResult()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    TodoCount = x.Todos.Count(),
+                })
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<NameModel>> ListSelection()
         {
+
             return await _userRepository._dbSet
                 .Select(x => new NameModel()
                 {

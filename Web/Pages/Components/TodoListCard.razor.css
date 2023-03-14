@@ -1,0 +1,26 @@
+﻿
+
+.todo-card{
+    display: flex;
+    padding: 5px 20px;
+
+    background-color: #c6c6c6;
+    border-radius: 7px;
+    margin: 0 0 10px 0;
+    max-width: 700px;
+    cursor: pointer;
+}
+
+
+.todo-card__text{
+    flex: 1;
+
+}
+
+.todo-card__status {
+    margin: 0 10px;
+}
+
+.todo-card__user {
+    width: 100px;
+}

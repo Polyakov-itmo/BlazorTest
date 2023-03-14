@@ -25,19 +25,14 @@
             Text="Добавить"
             Style="@Themes.PrimaryHover" 
         />
-        <div class="users__container">
-            <div class="users-list">
-                <p>
-                Количество пользователей: @allTodos.Count()
-                </p>
-                <div class="users-list__content">
+        <div class="todos__container">
+            <div class="todo-list">
                 @foreach (var todo in allTodos)
                 {
-                    <div>
-                        @todo.todo.Id
-                    </div>
+                    <TodoListCard 
+                        Todo="@todo.todo"
+                    />
                 }
-                </div>
             </div>
             
         </div>

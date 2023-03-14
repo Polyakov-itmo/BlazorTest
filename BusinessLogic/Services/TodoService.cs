@@ -42,17 +42,5 @@ namespace BusinessLogic.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<NameModel>> ListSelection()
-        {
-            return await todoRepository._dbSet
-                .Select(x => new NameModel()
-                {
-                    Id = x.Id,
-                    Name = x.Text,
-                })
-                .ToListAsync();
-
-        }
-
     }
 }

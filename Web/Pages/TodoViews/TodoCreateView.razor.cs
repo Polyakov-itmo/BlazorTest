@@ -16,10 +16,11 @@ namespace Web.Pages.TodoViews
 
         #region[State]
         public TodoCreate todoToCreate = new();
-        public IEnumerable<IdModel>? userSelection { get; set; }
+        public IEnumerable<NameModel>? userSelection { get; set; }
         public Todo? CreatedTodo;
         private bool isNotify = false;
         private bool isCreated = false;
+        private string Error = "Нет ошибок";
         #endregion[State]
 
 
@@ -29,12 +30,32 @@ namespace Web.Pages.TodoViews
             userSelection = await _userService.ListSelection();
         }
 
+        private void ClearInputs()
+        {
+            todoToCreate.Text = string.Empty;
+            todoToCreate.IsDone = false;
+            todoToCreate.UserId = 0;
+        }
+
+        private bool CheckInputs()
+        {
+            return !String.IsNullOrEmpty(todoToCreate.Text);
+        }
+
         private async Task CreateTodo()
         {
-            var result = await _todoService.Create(todoToCreate);
-            if(result is not null)
+            if (CheckInputs())
             {
-                isCreated = true;
+                var result = await _todoService.Create(todoToCreate);
+                ClearInputs();
+                if (result is not null)
+                {
+                    isCreated = true;
+                }
+            }
+            else
+            {
+                Error = "Поле текста задания пустое";
             }
         }
     }

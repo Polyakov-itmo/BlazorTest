@@ -1,0 +1,38 @@
+﻿@using BusinessLogic.ViewModels.TodoModels;
+
+
+<div class="todo-card">
+    <div class="todo-card__text">
+        @Todo.Text
+    </div>
+    <div class="todo-card__status">
+        <input type="checkbox" @bind="@Todo.IsDone" />
+    </div>
+    @if (Todo.UserName is null)
+    {
+        <div class="todo-card__user">
+            Not assigned
+        </div>
+    }
+    else
+    {
+        <a>@Todo.UserName</a>
+    }
+</div>
+
+
+
+
+
+@code {
+
+    #region [State]
+    #endregion[State]
+
+    #region [Params]
+    [Parameter]
+    public TodoListResult Todo { get; set; }
+    [Parameter]
+    public EventCallback<int>? Delete { get; set; }
+    #endregion [Params]
+}
